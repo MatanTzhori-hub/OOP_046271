@@ -16,6 +16,50 @@ public class TextAnalyzer {
     private static final int MAX_LEN = 15;
 
     /**
+     * @requires filePath is a valid file-path and is not null.
+     * @effects Prints statistics about the file. Prints an error if file does not exist.
+     * @modifies Nothing.
+     * @param filePath is a string path to the file to analyze.
+     */
+    private static void analyzeTextFile(String filePath){
+        File textFile = new File(filePath);
+        if (!textFile.exists()) {
+            System.out.println("File does not exist!");
+            return;
+        }
+
+        int wordsCount = 0;
+        int linesCount = 0;
+        double[] linesCountWordsLengths = new double[MAX_LEN+1];
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Don't count empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                linesCount++;
+
+                // Split line using the given delimiters
+                StringTokenizer tokenizer = new StringTokenizer(line, DELIMITERS);
+                while (tokenizer.hasMoreTokens()) {
+                    String word = tokenizer.nextToken();
+                    if (word.length() >= MIN_LEN && word.length() <= MAX_LEN) {
+                        linesCountWordsLengths[word.length()]++;
+                    }
+                    wordsCount++;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            return;
+        }
+
+        printStatistics(wordsCount, linesCount, linesCountWordsLengths);
+    }
+    
+    /**
      * @requires lineCount and wordCount is not zero.
      * @effects prints statistics about the file.
      * @modifies wordsLengthsCount
@@ -41,50 +85,6 @@ public class TextAnalyzer {
         for (int i = MIN_LEN; i <= MAX_LEN; i++) {
             System.out.printf("Words with %d characters: %.2f%%\n", i, wordsLengthsCount[i] * 100);
         }
-    }
-
-    /**
-     * @requires filePath is a valid file-path and is not null.
-     * @effects Prints statistics about the file. Prints an error if file does not exist.
-     * @modifies Nothing.
-     * @param filePath is a string path to the file to analyze.
-     */
-    private static void analyzeTextFile(String filePath){
-        File textFile = new File(filePath);
-        if (!textFile.exists()) {
-            System.out.println("File does not exist!");
-            return;
-        }
-
-        int wordsCount = 0;
-        int linesCount = 0;
-        double[] linesCounwordsLengthsCountt = new double[MAX_LEN+1];
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Skip empty lines
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-                linesCount++;
-
-                // Split line using the given delimiters
-                StringTokenizer tokenizer = new StringTokenizer(line, DELIMITERS);
-                while (tokenizer.hasMoreTokens()) {
-                    String word = tokenizer.nextToken();
-                    if (word.length() >= MIN_LEN && word.length() <= MAX_LEN) {
-                        linesCounwordsLengthsCountt[word.length()]++;
-                    }
-                    wordsCount++;
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-            return;
-        }
-
-        printStatistics(wordsCount, linesCount, linesCounwordsLengthsCountt);
     }
 
     public static void main(String[] args) {
