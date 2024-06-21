@@ -1,17 +1,20 @@
 package homework0;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * This is a container that can be used to contain Balls. A given Ball may
  * only appear in a BallContainer once.
  */
 public class BallContainer {
+    private List<Ball> ballsList;
 
     /**
      * @effects Creates a new BallContainer.
      */
     public BallContainer() {
-		//TODO: Add your code here
-		
+      this.ballsList = new ArrayList<>();
     }
 
 
@@ -22,8 +25,13 @@ public class BallContainer {
      * 		   i.e. ball is not already in the container; false otherwise.
      */
     public boolean add(Ball ball) {
-		// TODO: Add your code here
-		
+      if (ball == null | this.ballsList.contains(ball)){
+        return false;
+      }
+      else{
+        this.ballsList.add(ball);
+        return true;
+      }
     }
 
 
@@ -34,8 +42,13 @@ public class BallContainer {
      * 		   i.e. ball is actually in the container; false otherwise.
      */
     public boolean remove(Ball ball) {
-		// TODO: Add your code here
-		
+      if (ballsList.contains(ball)){
+        this.ballsList.remove(ball);
+        return true;
+      }
+      else{
+        return true;
+      }
     }
 
 
@@ -44,8 +57,12 @@ public class BallContainer {
      * 		   total volume of all Balls in the container.
      */
     public double getVolume() {
-		// TODO: Add your code here
-		
+      double sumVolume = 0;
+
+      for(Ball ball : this.ballsList){
+        sumVolume += ball.getVolume();
+      }
+      return sumVolume;
     }
 
 
@@ -53,8 +70,7 @@ public class BallContainer {
      * @return the number of Balls in the container.
      */
     public int size() {
-		// TODO: Add your code here
-		
+      return this.ballsList.size();
     }
 
 
@@ -63,8 +79,7 @@ public class BallContainer {
      * @effects Empties the container, i.e. removes all its contents.
      */
     public void clear() {
-		// TODO: Add your code here
-		
+      this.ballsList.clear();
     }
 
 
@@ -72,8 +87,7 @@ public class BallContainer {
      * @return true if this container contains ball; false, otherwise.
      */
     public boolean contains(Ball ball) {
-		// TODO: Add your code here
-	
+      return this.ballsList.contains(ball);
     }
 
 }
