@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * 
+ * A program that analyzes a text file and prints the following statistics about the file:
+ * - Amount of words in file.
+ * - Average words per line.
+ * - The fraction of the total words for words with length 1-15.
  */
 public class TextAnalyzer {
     private static final String DELIMITERS = " ;?{}[]=-+_!@#$%^&*():',.";
@@ -16,9 +19,9 @@ public class TextAnalyzer {
      * @requires lineCount and wordCount is not zero.
      * @effects prints statistics about the file.
      * @modifies wordsLengthsCount
-     * @param wordCount is the amount of words in the text file.
-     * @param lineCount is the amount of lines in the text file.
-     * @param wordLengthCounts is a Histogram array with amount of words with length i in the cell i. (cell 0 is unused)
+     * @param wordsCount is the amount of words in the text file.
+     * @param linesCount is the amount of lines in the text file.
+     * @param wordsLengthsCount is a Histogram array with amount of words with length i in the cell i. (cell 0 is unused)
      */
     private static void printStatistics(int wordsCount, int linesCount, double wordsLengthsCount[]){
         double avgLineWords = 0;
@@ -42,7 +45,7 @@ public class TextAnalyzer {
 
     /**
      * @requires filePath is a valid file-path and is not null.
-     * @effects Prints statistics about the file.
+     * @effects Prints statistics about the file. Prints an error if file does not exist.
      * @modifies Nothing.
      * @param filePath is a string path to the file to analyze.
      */
