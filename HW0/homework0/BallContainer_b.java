@@ -7,14 +7,16 @@ import java.util.List;
  * This is a container that can be used to contain Balls. A given Ball may
  * only appear in a BallContainer once.
  */
-public class BallContainer {
+public class BallContainer_b {
     private List<Ball> ballsList;
+    private double totalVolume;
 
     /**
      * @effects Creates a new BallContainer.
      */
-    public BallContainer() {
+    public BallContainer_b() {
       this.ballsList = new ArrayList<>();
+      totalVolume = 0;
     }
 
 
@@ -30,6 +32,7 @@ public class BallContainer {
       }
       else{
         this.ballsList.add(ball);
+        this.totalVolume += ball.getVolume();
         return true;
       }
     }
@@ -44,10 +47,11 @@ public class BallContainer {
     public boolean remove(Ball ball) {
       if (ballsList.contains(ball)){
         this.ballsList.remove(ball);
+        this.totalVolume -= ball.getVolume();
         return true;
       }
       else{
-        return true;
+        return false;
       }
     }
 
@@ -57,12 +61,7 @@ public class BallContainer {
      * 		   total volume of all Balls in the container.
      */
     public double getVolume() {
-      double sumVolume = 0;
-
-      for(Ball ball : this.ballsList){
-        sumVolume += ball.getVolume();
-      }
-      return sumVolume;
+      return this.totalVolume;
     }
 
 
