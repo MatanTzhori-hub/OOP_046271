@@ -1,16 +1,20 @@
 package homework0;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A wallet can contain a number of coins. There could be several coins of the same value, 
  * but the same coin cannot appear in the wallet twice.
  */
 public class Wallet {
-	
+    private List<Coin> coinsList;
+
     /**
      * @effects Creates a new empty wallet
      */
     public Wallet() {
-    	//TODO
+    	this.coinsList = new ArrayList<>();
     }
 
 
@@ -21,7 +25,13 @@ public class Wallet {
      * 		   false otherwise
      */
     public boolean addCoin(Coin coin) {
-    	//TODO
+        if (coin == null | this.coinsList.contains(coin)){
+            return false;
+          }
+          else{
+            this.coinsList.add(coin);
+            return true;
+          }
     }
 
     /**
@@ -33,7 +43,22 @@ public class Wallet {
      * @return the amount actually paid, 0 if amount could not be obtained
      */
     public double pay(double sum) {
-    	//TODO
+        if (sum <= 0){
+            throw new IllegalArgumentException("Sum value not allowed.");
+        }
+        else if (this.getTotal() < sum) {
+            return 0;
+        }
+
+        double paid = 0;
+
+        while (sum > 0){
+            Coin curCoin = this.coinsList.removeFirst();
+            paid += curCoin.getValue();
+            sum -= curCoin.getValue();
+        }
+
+        return paid;
     }
 
 
@@ -41,7 +66,11 @@ public class Wallet {
      * @return the total value of coins in this wallet
      */
     public double getTotal() {
-    	//TODO
+        double sumAmount = 0;
+        for(Coin coin : this.coinsList){
+            sumAmount += coin.getValue();
+        }
+        return sumAmount;
     }
 
 
@@ -49,7 +78,7 @@ public class Wallet {
      * @return the number of coins in this wallet
      */
     public int getSize() {
-    	//TODO
+        return this.coinsList.size();
     }
 
 
@@ -59,7 +88,7 @@ public class Wallet {
 	 * 			getSize() and getTotal() will return 0.
      */
     public void empty() {
-    	//TODO
+        this.coinsList.clear();
     }
 
 
@@ -68,7 +97,12 @@ public class Wallet {
      *  	   false otherwise
      */
     public boolean containsCoin(double value) {
-    	//TODO
+        for(Coin coin : this.coinsList){
+            if (coin.getValue() == value){
+                return true;
+            }
+        }
+        return false;
     }
 	
 	
@@ -77,7 +111,7 @@ public class Wallet {
      *  	   false otherwise
      */
     public boolean containsAmount(double value) {
-    	//TODO
+        return (value == this.getTotal());
     }
 	
 }

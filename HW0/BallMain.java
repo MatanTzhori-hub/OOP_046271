@@ -4,7 +4,8 @@ import homework0.BallContainer_a;
 public class BallMain {
     public static void main(String[] args) {
         /**
-         *  In this test program, each comment states the anticipated return value.
+         *  This program tests some of the functionality of classes Ball and BallContainer.
+         *  Each comment states the anticipated return value.
          */
 
         Ball ball1 = new Ball(1);

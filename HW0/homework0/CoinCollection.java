@@ -1,16 +1,21 @@
 package homework0;
 
+import java.util.HashSet;
+
 /**
  * A coin collection contains coins. Each coin value can only appear in the
  * collection once (e.g only one coin with value 0.05)
  */
 public class CoinCollection {
+	private HashSet<Double> coinsSet;
+	private double sumCoins;
 
 	/**
 	 * @effects Creates a new empty coin collection
 	 */
 	public CoinCollection() {
-		// TODO
+		this.coinsSet = new HashSet<>();
+		sumCoins = 0;
 	}
 
 	/**
@@ -20,21 +25,28 @@ public class CoinCollection {
 	 *         otherwise
 	 */
 	public boolean addCoin(Coin coin) {
-		// TODO
+		if (coin == null | this.coinsSet.contains(coin.getValue())){
+			return false;
+		  }
+		  else{
+			this.coinsSet.add(coin.getValue());
+			sumCoins += coin.getValue();
+			return true;
+		  }
 	}
 
 	/**
 	 * @return the current value of the collection
 	 */
 	public double getTotal() {
-		// TODO
+		return this.sumCoins;
 	}
 
 	/**
 	 * @return the total value of coins in the collection
 	 */
 	public int getSize() {
-		// TODO
+		return this.coinsSet.size();
 	}
 
 	/**
@@ -43,6 +55,7 @@ public class CoinCollection {
 	 *          and getTotal() will return 0.
 	 */
 	public void empty() {
-		// TODO
+		this.coinsSet.clear();
+		this.sumCoins = 0;
 	}
 }
