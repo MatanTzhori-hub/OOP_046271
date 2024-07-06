@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CoinMain",
+            "request": "launch",
+            "mainClass": "CoinMain",
+            "projectName": "HW0_1a6a8b27"
+        },
+        {
+            "type": "java",
+            "name": "BallMain",
+            "request": "launch",
+            "mainClass": "BallMain",
+            "projectName": "HW0_1a6a8b27"
+        },
+        {
+            "type": "java",
+            "name": "TextAnalyzer",
+            "request": "launch",
+            "mainClass": "TextAnalyzer",
+            "projectName": "",
+            "args": "Engine.txt"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "",
+            "args": "Engine.txt"
+        }
+    ]
+}
