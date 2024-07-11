@@ -13,16 +13,12 @@ public abstract class Shape implements Cloneable {
 	private Point location;
 	private Color color;
 
-	
-	// TODO: Write Abstraction Function
-	// TODO: Write Representation Invariant
     /**
      * Abstraction Function: The Shape class represents a geometric shape that this.location point is the top left corner
      *                       of it's bounding rectangle on the 2D plane, and have the color this.color.
      * 
      * Representation Invariant: location != null, color != null
      */
-	
 	
 	/**
 	 * @effects Initializes this with a a given location and color.
@@ -37,7 +33,6 @@ public abstract class Shape implements Cloneable {
      * @return the top left corner of the bounding rectangle of this.
      */
     public Point getLocation() {
-    	// TODO: Implement this method
         checkRep();
     	return (Point)location.clone();
     }
@@ -109,7 +104,6 @@ public abstract class Shape implements Cloneable {
      * @effects Creates and returns a copy of this.
      */
     public Object clone() {
-    	// TODO: Implement this method
         checkRep();
     	return Shape((Point)this.location.clone(), color);
     }
