@@ -7,7 +7,7 @@ import java.awt.*;
  * method. A LocationChangingRectangle has a velocity property that determines the speed
  * of location changing.
  * Thus, a typical LocationChangingRectangle consists of the following set of
- * properties: {location, color, height, width, size, velocity}
+ * properties: {location, color, dimension, size, velocity}
  */
 
 public class LocationChangingRectangle extends LocationChangingShape {
@@ -16,7 +16,7 @@ public class LocationChangingRectangle extends LocationChangingShape {
      * Abstraction Function: The LocationChangingRectangle class represents a Rectangle that may move in the 2D plane.
      *                       dimension.height is the height of the Rectangle and dimension.width is the width of the Rectangle.
      * 
-     * Representation dimension != null, Invariant: 0 < dimension.height, 0 < dimension.width
+     * Representation Invariant: dimension != null, 0 < dimension.height, 0 < dimension.width
      */ 
     private static final int defaultSize = 10;
 
@@ -28,13 +28,13 @@ public class LocationChangingRectangle extends LocationChangingShape {
     private void checkRep() {
         assert dimension == null: "Error: invalid dimension";
         assert 0 < this.dimension.getHeight(): "Error: invalid height";
-        assert 0 < this.dimension.getWidth(): "Error: invalid wight";
+        assert 0 < this.dimension.getWidth(): "Error: invalid width";
     }
 
     /**
      * @requires location != null, color != null
 	 * @effects Initializes this with a a given location and color.
-	 *          dimension is being set by default to (height, width) = (1, 1).
+	 *          rectangle size is being set by default to (height, width) = (10, 10).
 	 */
     public LocationChangingRectangle(Point location, Color color){
         super(location, color);
@@ -45,7 +45,7 @@ public class LocationChangingRectangle extends LocationChangingShape {
 
     /**
      * @requires location != null, color != null, dimension != null
-	 * @effects Initializes this with a a given location, color, height and width.
+	 * @effects Initializes this with a a given location, color and dimension.
      *          throws ImpossibleSizeException if got invalid dimension.
 	 */
     public LocationChangingRectangle(Point location, Color color, Dimension dimension) throws ImpossibleSizeException{
@@ -80,11 +80,7 @@ public class LocationChangingRectangle extends LocationChangingShape {
     @Override
     public Rectangle getBounds(){
         checkRep();
-        int x = this.getLocation().x;
-        int y = this.getLocation().y;
-        int h = (int)this.dimension.getHeight();
-        int w = (int)this.dimension.getWidth();
-        return new Rectangle(x, y, h, w);
+        return new Rectangle(this.getLocation(), dimension);
     }
 
     /**
@@ -116,7 +112,7 @@ public class LocationChangingRectangle extends LocationChangingShape {
     	LocationChangingRectangle rectClone;
     	rectClone = (LocationChangingRectangle)super.clone();
     	rectClone.dimension = (Dimension)dimension.clone();
-    	return rectClone;
 
+    	return rectClone;
     }
 }
