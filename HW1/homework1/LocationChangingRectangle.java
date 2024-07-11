@@ -106,4 +106,17 @@ public class LocationChangingRectangle extends LocationChangingShape {
 
         checkRep();
     }
+
+    /**
+     * @effects Creates and returns a copy of this.
+     */
+	@Override
+    public Object clone() {
+    	checkRep();
+    	LocationChangingRectangle rectClone;
+    	rectClone = (LocationChangingRectangle)super.clone();
+    	rectClone.dimension = (Dimension)dimension.clone();
+    	return rectClone;
+
+    }
 }
