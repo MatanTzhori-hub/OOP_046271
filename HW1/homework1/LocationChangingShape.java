@@ -13,9 +13,13 @@ import java.util.Random;
  */
 public abstract class LocationChangingShape extends Shape implements Animatable {
 
-	// TODO: Write Abstraction Function
-	
-	// TODO: Write Representation Invariant
+    /**
+     * Abstraction Function: The LocationChangingShape class represents a geometric shape that may move in the 2D plane.
+     *                       this.xVelocity is the horizonal velocity, and this.yVelocity is the vertical velocity.
+     * 
+     * Representation Invariant: -5 <= this.xVelocity <= 5, this.xVelocity != 0
+     *                           -5 <= this.yVelocity <= 5, this.yVelocity != 0
+     */ 
 
     private static final int MAX_INIT_VELOCITY = 5;
 
@@ -26,7 +30,8 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
      * @effects Ensures the Rep. Invariant is kept, asserts otherwise.
      */
     private void checkRep() {
-        assert false: "Error: error message";
+        assert (-MAX_INIT_VELOCITY <= this.xVelocity && this.xVelocity <= MAX_INIT_VELOCITY && this.xVelocity != 0): "Error: invalid x velocity";
+        assert (-MAX_INIT_VELOCITY <= this.yVelocity && this.yVelocity <= MAX_INIT_VELOCITY && this.yVelocity != 0): "Error: invalid y velocity";
     }
 	
 	/**
@@ -36,7 +41,6 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 	 *          -5 <= i <= 5 and i != 0
 	 */
 	LocationChangingShape(Point location, Color color) {
-    	// TODO: Implement this constructor
         super(location, coler);
         Random randomGenerator = new Random(); 
         xVelocity = randomGenerator.nextInt(2*MAX_INIT_VELOCITY) - MAX_INIT_VELOCITY;
@@ -55,7 +59,6 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
      * @return the horizontal velocity of this.
      */
     public int getVelocityX() {
-    	// TODO: Implement this method
         checkRep();
         return this.xVelocity;
     }
@@ -65,7 +68,6 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
      * @return the vertical velocity of this.
      */
     public int getVelocityY() {
-    	// TODO: Implement this method
         checkRep();
         return this.yVelocity;
     }
@@ -77,7 +79,6 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
      * 			vertical velocity of this to velocityY.
      */
     public void setVelocity(int velocityX, int velocityY) {
-    	// TODO: Implement this method
         checkRep();
     	this.xVelocity = velocityX;
         this.yVelocity = velocityY;
@@ -102,11 +103,38 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
      * 			p = p + v
      */
     public void step(Rectangle bound) {
-    	// TODO: Implement this method
     	checkRep();
+        Rectangle shapeBoundry = getBounds();
+
+        boolean xOutOfBounds        = shapeBoundry.getMinX() < bound.getMinX() || shapeBoundry.getMaxX() > bound.getMaxX();
+        boolean yOutOfBounds        = shapeBoundry.getMinXY() < bound.getMinY() || shapeBoundry.getMaxY() > bound.getMaxY();
+        boolean xStepOutOfBounds    = shapeBoundry.getMinX() + xVelocity < bound.getMinX() ||
+                                      shapeBoundry.getMaxX() + xVelocity > bound.getMaxX();
+        boolean yStepOutOfBounds    = shapeBoundry.getMinY() + yVelocity < bound.getMinY() ||
+                                      shapeBoundry.getMaxY() + yVelocity > bound.getMaxY();
+        boolean xStepAwayFromCenter = shapeBoundry.getMaxX() + xVelocity > bound.getCenterX() ||
+                                      shapeBoundry.getMinX() + xVelocity < bound.getCenterX();
+        boolean yStepAwayFromCenter = shapeBoundry.getMaxY() + yVelocity > bound.getCenterY() ||
+                                      shapeBoundry.getMinY() + yVelocity < bound.getCenterY();
+
+        if(xOutOfBounds || xStepOutOfBounds || xStepAwayFromCenter){
+            this.xVelocity = -xVelocity;
+        }
+        if(yOutOfBounds || yStepOutOfBounds || yStepAwayFromCenter){
+            this.yVelocity = -yVelocity;
+        }
+
         Point newLocation = this.getLocation();
-        newLocation.setLocation(newLocation.x + this.xVelocity, newLocation.y + this.yVelocity);
+        newLocation.setLocation(newLocation.x + xVelocity, newLocation.y + yVelocity);
         this.setLocation(newLocation);
         checkRep();
+    }
+
+    /**
+     * @effects Creates and returns a copy of this.
+     */
+    public Object clone() {
+        checkRep();
+    	return LocationChangingShape(this.getLocation(), this.getColor());
     }
 }
