@@ -89,7 +89,7 @@ public abstract class Shape implements Cloneable {
      * @effects Sets color of this.
      */
     public void setColor(Color color) {
-    	this.color = color;
+    	this.color = new Color(color.getRed(), color.getBlue(), color.getGreen());
     }
 
 
@@ -105,8 +105,18 @@ public abstract class Shape implements Cloneable {
      */
     public Object clone() {
         checkRep();
-    	return Shape((Point)this.location.clone(), color);
+        Shape clonnedShape = null;
+        try{
+            clonnedShape = (Shape)super.clone();
+        }
+        catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+    	clonnedShape.location = (Point)location.clone();
+    	clonnedShape.color = color;
+        return clonnedShape;
     }
+
 
     /**
      * @effects Ensures the Rep. Invariant is kept, asserts otherwise.

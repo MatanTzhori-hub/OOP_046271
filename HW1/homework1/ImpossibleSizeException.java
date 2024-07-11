@@ -1,5 +1,6 @@
 package homework1;
 
+import java.awt.Dimension;
 
 /**
  * ImpossibleSizeException is an exception thrown when Shape's size
@@ -7,7 +8,7 @@ package homework1;
  */
 public class ImpossibleSizeException extends Exception {
     
-
+    private static final int defaultSize = 10;
 
     ImpossibleSizeException(){
         super();
@@ -24,4 +25,8 @@ public class ImpossibleSizeException extends Exception {
     ImpossibleSizeException(String message, Throwable casue){
         super(message, casue);
     };
+
+    Dimension suggestSize(){
+        return new Dimension(defaultSize, defaultSize);
+    }
 }

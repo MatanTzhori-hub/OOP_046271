@@ -41,7 +41,7 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
 	 *          -5 <= i <= 5 and i != 0
 	 */
 	LocationChangingShape(Point location, Color color) {
-        super(location, coler);
+        super(location, color);
         Random randomGenerator = new Random(); 
         xVelocity = randomGenerator.nextInt(2*MAX_INIT_VELOCITY) - MAX_INIT_VELOCITY;
         yVelocity = randomGenerator.nextInt(2*MAX_INIT_VELOCITY) - MAX_INIT_VELOCITY;
@@ -107,7 +107,7 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
         Rectangle shapeBoundry = getBounds();
 
         boolean xOutOfBounds        = shapeBoundry.getMinX() < bound.getMinX() || shapeBoundry.getMaxX() > bound.getMaxX();
-        boolean yOutOfBounds        = shapeBoundry.getMinXY() < bound.getMinY() || shapeBoundry.getMaxY() > bound.getMaxY();
+        boolean yOutOfBounds        = shapeBoundry.getMinY() < bound.getMinY() || shapeBoundry.getMaxY() > bound.getMaxY();
         boolean xStepOutOfBounds    = shapeBoundry.getMinX() + xVelocity < bound.getMinX() ||
                                       shapeBoundry.getMaxX() + xVelocity > bound.getMaxX();
         boolean yStepOutOfBounds    = shapeBoundry.getMinY() + yVelocity < bound.getMinY() ||
@@ -128,13 +128,5 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
         newLocation.setLocation(newLocation.x + xVelocity, newLocation.y + yVelocity);
         this.setLocation(newLocation);
         checkRep();
-    }
-
-    /**
-     * @effects Creates and returns a copy of this.
-     */
-    public Object clone() {
-        checkRep();
-    	return LocationChangingShape(this.getLocation(), this.getColor());
     }
 }
