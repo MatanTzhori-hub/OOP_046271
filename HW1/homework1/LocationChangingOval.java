@@ -96,8 +96,8 @@ public class LocationChangingOval extends LocationChangingShape {
 
         int x = getLocation().x;
         int y = getLocation().y;
-        int h = (int)getBounds().getWidth();
-        int w = (int)getBounds().getHeight();
+        int w = (int)getBounds().getWidth();
+        int h = (int)getBounds().getHeight();
 
         ((Graphics2D) g).setColor(getColor());
     	((Graphics2D) g).fillOval(x, y, w, h);

@@ -112,15 +112,15 @@ public abstract class LocationChangingShape extends Shape implements Animatable 
                                       shapeBoundry.getMaxX() + xVelocity > bound.getMaxX();
         boolean yStepOutOfBounds    = shapeBoundry.getMinY() + yVelocity < bound.getMinY() ||
                                       shapeBoundry.getMaxY() + yVelocity > bound.getMaxY();
-        boolean xStepAwayFromCenter = shapeBoundry.getMaxX() + xVelocity > bound.getCenterX() ||
-                                      shapeBoundry.getMinX() + xVelocity < bound.getCenterX();
-        boolean yStepAwayFromCenter = shapeBoundry.getMaxY() + yVelocity > bound.getCenterY() ||
-                                      shapeBoundry.getMinY() + yVelocity < bound.getCenterY();
+        // boolean xStepAwayFromCenter = shapeBoundry.getMaxX() + xVelocity > bound.getCenterX() ||
+        //                               shapeBoundry.getMinX() + xVelocity < bound.getCenterX();
+        // boolean yStepAwayFromCenter = shapeBoundry.getMaxY() + yVelocity > bound.getCenterY() ||
+        //                               shapeBoundry.getMinY() + yVelocity < bound.getCenterY();
 
-        if(xOutOfBounds || xStepOutOfBounds || xStepAwayFromCenter){
+        if(xOutOfBounds || xStepOutOfBounds){// || xStepAwayFromCenter){
             this.xVelocity = -xVelocity;
         }
-        if(yOutOfBounds || yStepOutOfBounds || yStepAwayFromCenter){
+        if(yOutOfBounds || yStepOutOfBounds){// || yStepAwayFromCenter){
             this.yVelocity = -yVelocity;
         }
 

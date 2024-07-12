@@ -3,6 +3,9 @@ package homework1;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Main application class for exercise #1.
@@ -28,6 +31,7 @@ public class Animator extends JFrame implements ActionListener {
 	// shapes that have been added to this
 	
 	// TODO: Add and initialize a container of shapes called shapes.
+	private ArrayList<Shape> shapes = new ArrayList<>();
 	
 
 	/**
@@ -51,7 +55,12 @@ public class Animator extends JFrame implements ActionListener {
                 if (animationCheckItem.isSelected()) {
                 	// TODO: Add code for making one animation step for all
                 	// 		 shapes in this
+					Iterator<Shape> shapesIter = shapes.iterator();
 
+					while(shapesIter.hasNext()){
+						Animatable curShape = (Animatable) shapesIter.next();
+						curShape.step(mainPanel.getBounds());
+					}
                 	
 
             		repaint();	// make sure that the shapes are redrawn
@@ -132,7 +141,12 @@ public class Animator extends JFrame implements ActionListener {
 		super.paint(g);
 
 		//TODO: Add code for drawing all shapes in this
-
+		Iterator<Shape> shapesIter = shapes.iterator();
+					
+		while(shapesIter.hasNext()){
+			Shape curShape = (Shape) shapesIter.next();
+			curShape.draw(getContentPane().getGraphics());
+		}
 		
 	}
 
@@ -151,6 +165,7 @@ public class Animator extends JFrame implements ActionListener {
 			repaint();
 			
 			//TODO  Add code for number of LocationChangingNumerOval = 0
+			LocationChangingNumberedOval.resetNumbering();
 		}
 
 		// File->Exit: close application
@@ -170,6 +185,59 @@ public class Animator extends JFrame implements ActionListener {
 			//		 its location and size are randomly selected &&
 			//		 1/10*WINDOW_WIDTH <= shape.width < 3/10*WINDOW_WIDTH &&
 			//		 1/10*WINDOW_HEIGHT <= shape.height < 3/10*WINDOW_HEIGHT
+			
+        	Random randomGenerator = new Random();
+			int new_width = randomGenerator.nextInt((int)(0.2*WINDOW_WIDTH)) + (int)(0.1*WINDOW_WIDTH);
+			int new_height = randomGenerator.nextInt((int)(0.2*WINDOW_HEIGHT)) + (int)(0.1*WINDOW_HEIGHT);
+			int new_x = randomGenerator.nextInt((int)(WINDOW_WIDTH - new_width));
+			int new_y = randomGenerator.nextInt((int)(WINDOW_HEIGHT - new_height));
+
+			Point newLocation = new Point(new_x, new_y);
+			Dimension newDimension = new Dimension(new_width, new_height);
+			Color newColor = new Color(randomGenerator.nextInt(255), randomGenerator.nextInt(255), randomGenerator.nextInt(255));
+
+			if(source.equals(rectangleItem)){
+				try{
+					shapes.add(new LocationChangingRectangle(newLocation, newColor, newDimension));
+				}
+				catch(ImpossibleSizeException e_size){
+					shapes.add(new LocationChangingRectangle(newLocation, newColor));
+				}
+			}
+			else if(source.equals(roundedRectangleItem)){
+				try{
+					shapes.add(new LocationChangingRoundedRectangle(newLocation, newColor, newDimension));
+				}
+				catch(ImpossibleSizeException e_size){
+					shapes.add(new LocationChangingRoundedRectangle(newLocation, newColor));
+				}
+			}
+			else if(source.equals(ovalItem)){
+				try{
+					shapes.add(new LocationChangingOval(newLocation, newColor, newDimension));
+				}
+				catch(ImpossibleSizeException e_size){
+					shapes.add(new LocationChangingOval(newLocation, newColor));
+				}
+			}
+			else if(source.equals(numberedOvalItem)){
+				try{
+					shapes.add(new LocationChangingNumberedOval(newLocation, newColor, newDimension));
+				}
+				catch(ImpossibleSizeException e_size){
+					shapes.add(new LocationChangingNumberedOval(newLocation, newColor));
+				}
+			}
+			else if(source.equals(sectorItem)){
+				int startAngle = randomGenerator.nextInt(360);
+				int arcAngle = randomGenerator.nextInt(360);
+				try{
+					shapes.add(new AngleChangingSector(newLocation, newColor, newDimension, startAngle, arcAngle));
+				}
+				catch(ImpossibleSizeException e_size){
+					shapes.add(new AngleChangingSector(newLocation, newColor, startAngle, arcAngle));
+				}
+			}
 		
 			
 			repaint();

@@ -22,7 +22,7 @@ public class LocationChangingNumberedOval extends LocationChangingOval {
      * Representation Invariant: this.ovalNumber <= createdOvals
      */ 
 
-    private static long createdOvals = 0;
+    private static long createdOvals = 1;
     private long ovalNumber;
 
     private void checkRep() {
@@ -59,16 +59,26 @@ public class LocationChangingNumberedOval extends LocationChangingOval {
     @Override
     public void draw(Graphics g){
         checkRep();
-        
+
         int x = getLocation().x;
         int y = getLocation().y;
-        int h = (int)getBounds().getWidth();
-        int w = (int)getBounds().getHeight();
+        int w = (int)getBounds().getWidth();
+        int h = (int)getBounds().getHeight();
 
         super.draw(g);
+        g.setColor(Color.WHITE);
         ((Graphics2D) g).drawString(Long.toString(this.ovalNumber), (int)(x + w/2.0) , (int)(y + h/2.0));
 
         checkRep();
+    }
+
+    /**
+     * @requires g != null
+     * @modifies g
+     * @effects Draws this onto g with this's number.
+     */
+    public static void resetNumbering(){
+        LocationChangingNumberedOval.createdOvals = 1;
     }
 
     /**
