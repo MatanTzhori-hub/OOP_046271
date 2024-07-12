@@ -1,28 +1,32 @@
 package homework1;
 
 import java.awt.*;
-
+import java.util.Random;
 
 /**
- * A LocationChangingOval is an Oval that can change its location using its step()
- * method. A LocationChangingOval has a velocity property that determines the speed
- * of location changing.
- * Thus, a typical LocationChangingOval consists of the following set of
- * properties: {location, color, dimension, size, velocity}
+ * A AngleChangingSector is sector of a Circle/Oval that spins using step()
+ * method.
+ * Thus, a typical AngleChangingSector consists of the following set of
+ * properties: {location, color, shape, size, arc-angle}
  */
-
-public class LocationChangingOval extends LocationChangingShape {
+public class AngleChangingSector extends Shape implements Animatable {
     
     /**
-     * Abstraction Function: The LocationChangingOval class represents an Oval that may move in the 2D plane.
+     * Abstraction Function: The AngleChangingSector class represents a sector of a Circle/Oval that spins.
+     *                       this.startAngle represent the angle the sector starts, and this.arcAngle represents
+     *                       the amount of degrees the sector covers.
      *                       dimension.height is the height of the bounding Rectangle
      *                       and dimension.width is the width of the bounding Rectangle.
      * 
      * Representation Invariant: dimension != null, 0 < dimension.height, 0 < dimension.width
      */ 
+
     private static final int defaultSize = 10;
 
      Dimension dimension;
+
+    private int startAngle;
+    private int arcAngle;
 
     /**
      * @effects Ensures the Rep. Invariant is kept, asserts otherwise.
@@ -34,24 +38,24 @@ public class LocationChangingOval extends LocationChangingShape {
     }
 
     /**
-     * @requires location != null, color != null
-	 * @effects Initializes this with a a given location and color.
-	 *          bounding rectangle size is being set by default to (height, width) = (10, 10).
+	 * @effects Initializes this with a a given location, color, and angles.
 	 */
-    public LocationChangingOval(Point location, Color color){
+    AngleChangingSector(Point location, Color color, int startAngle, int arcAngle){
         super(location, color);
+        this.startAngle = startAngle;
+        this.arcAngle = arcAngle;
         Dimension dimension = new Dimension(defaultSize, defaultSize);
         this.dimension = dimension;
         checkRep();
     }
 
     /**
-     * @requires location != null, color != null, dimension != null
-	 * @effects Initializes this with a a given location, color and dimension.
-     *          throws ImpossibleSizeException if got invalid dimension.
+	 * @effects Initializes this with a a given location, color, dimension and angles.
 	 */
-    public LocationChangingOval(Point location, Color color, Dimension dimension) throws ImpossibleSizeException{
+    AngleChangingSector(Point location, Color color, Dimension dimension, int startAngle, int arcAngle) throws ImpossibleSizeException{
         super(location, color);
+        this.startAngle = startAngle;
+        this.arcAngle = arcAngle;
         this.setSize(dimension);
         checkRep();
     }
@@ -75,7 +79,6 @@ public class LocationChangingOval extends LocationChangingShape {
         checkRep();
     }
 
-    
     /**
      * @return the bounding rectangle of this.
      */
@@ -83,6 +86,19 @@ public class LocationChangingOval extends LocationChangingShape {
     public Rectangle getBounds(){
         checkRep();
         return new Rectangle(this.getLocation(), dimension);
+    }
+
+    /**
+     * @requires boud != null
+     * @modifies this
+     * @effects this.startingAngle grows by 1 degree.
+     */
+    public void step(Rectangle bound) {
+    	checkRep();
+        
+        this.startAngle = this.startAngle + 1;
+
+        checkRep();
     }
 
     /**
@@ -100,21 +116,9 @@ public class LocationChangingOval extends LocationChangingShape {
         int w = (int)getBounds().getHeight();
 
         ((Graphics2D) g).setColor(getColor());
-    	((Graphics2D) g).fillOval(x, y, w, h);
+    	((Graphics2D) g).fillArc(x, y, w, h, this.startAngle, this.arcAngle);
 
         checkRep();
     }
 
-    /**
-     * @effects Creates and returns a copy of this.
-     */
-	@Override
-    public Object clone() {
-    	checkRep();
-    	LocationChangingOval ovalClone;
-    	ovalClone = (LocationChangingOval)super.clone();
-    	ovalClone.dimension = (Dimension)dimension.clone();
-        
-    	return ovalClone;
-    }
 }

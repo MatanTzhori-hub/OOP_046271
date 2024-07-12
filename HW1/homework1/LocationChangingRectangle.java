@@ -98,7 +98,7 @@ public class LocationChangingRectangle extends LocationChangingShape {
         int w = (int)getBounds().getHeight();
 
         ((Graphics2D) g).setColor(getColor());
-    	((Graphics2D) g).fillRect(x, y, h, w);
+    	((Graphics2D) g).fillRect(x, y, w, h);
 
         checkRep();
     }
