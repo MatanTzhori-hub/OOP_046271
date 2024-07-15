@@ -26,6 +26,7 @@ public abstract class Shape implements Cloneable {
     public Shape(Point location, Color color) {
     	setLocation(location);
     	setColor(color);
+		checkRep();
     }
 
 
@@ -44,7 +45,9 @@ public abstract class Shape implements Cloneable {
      * 			returns location after call has completed.
      */
     public void setLocation(Point location) {
+		checkRep();
     	this.location = (Point)location.clone();
+		checkRep();
     }
 
 
@@ -72,7 +75,8 @@ public abstract class Shape implements Cloneable {
      * 		   this and false otherwise.
      */
     public boolean contains(Point point) {
-    	return getBounds().contains(point);
+		checkRep();
+		return getBounds().contains(point);
     }
         
 
@@ -80,7 +84,8 @@ public abstract class Shape implements Cloneable {
      * @return color of this.
      */
     public Color getColor() {
-    	return color;
+		checkRep();
+		return color;
     }
 
 
@@ -89,7 +94,10 @@ public abstract class Shape implements Cloneable {
      * @effects Sets color of this.
      */
     public void setColor(Color color) {
-    	this.color = new Color(color.getRed(), color.getBlue(), color.getGreen());
+	    checkRep();
+        this.color = new Color(color.getRed(), color.getBlue(), color.getGreen());
+		checkRep();
+
     }
 
 
@@ -114,6 +122,7 @@ public abstract class Shape implements Cloneable {
         }
     	clonnedShape.location = (Point)location.clone();
     	clonnedShape.color = color;
+		checkRep();
         return clonnedShape;
     }
 
