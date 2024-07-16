@@ -2,7 +2,6 @@ package homework1;
 
 import java.awt.*;
 
-
 /**
  * A LocationChangingOval is an Oval that can change its location using its step()
  * method. A LocationChangingOval has a velocity property that determines the speed
@@ -28,7 +27,7 @@ public class LocationChangingOval extends LocationChangingShape {
      * @effects Ensures the Rep. Invariant is kept, asserts otherwise.
      */
     private void checkRep() {
-        assert dimension == null: "Error: invalid dimension";
+        assert dimension != null: "Error: invalid dimension";
         assert 0 < this.dimension.getHeight(): "Error: invalid bounding rectangle height";
         assert 0 < this.dimension.getWidth(): "Error: invalid bounding rectangle width";
     }

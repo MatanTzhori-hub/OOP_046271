@@ -32,7 +32,7 @@ public class AngleChangingSector extends Shape implements Animatable {
      * @effects Ensures the Rep. Invariant is kept, asserts otherwise.
      */
     private void checkRep() {
-        assert dimension == null: "Error: invalid dimension";
+        assert dimension != null: "Error: invalid dimension";
         assert 0 < this.dimension.getHeight(): "Error: invalid bounding rectangle height";
         assert 0 < this.dimension.getWidth(): "Error: invalid bounding rectangle width";
     }
