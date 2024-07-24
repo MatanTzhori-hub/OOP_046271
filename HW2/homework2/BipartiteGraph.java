@@ -2,7 +2,9 @@ package homework2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
  * A BipartiteGraph is a simple directed graph containing Black and White nodes, with no self edges.
@@ -20,7 +22,9 @@ public class BipartiteGraph<L> {
      */
 
      /*
-      * Representation Invariant: 
+      * Representation Invariant:
+      *  all nodes in the graph most not have parallel edges, or self edges, and two nodes
+      *  with the same color may not be connected.
       */
 
     private HashMap<L, Node<L>> graphNodes;
@@ -29,7 +33,66 @@ public class BipartiteGraph<L> {
      * @effects asserts if the Representation Invarient breaks.
      */
     private void checkRep(){
+        assert checkColorRestriction() : "Same color nodes are not allowed to be connected";
+        assert checkSelfEdgeRestriction() : "Self edges are not allowed";
+        assert checkParallelEdgesRestriction() : "No parallel edges are allowed";
         return;
+    }
+
+    /**
+     * @return true if no two nodes with the same color are connected, else false.
+     */
+    private boolean checkColorRestriction(){
+        for (Node<L> node : graphNodes.values()){
+            for (L child : node.getChildren()){
+                if (node.getColor() == graphNodes.get(child).getColor()){
+                    return false;
+                }
+            }
+            for (L parent : node.getParents()){
+                if (node.getColor() == graphNodes.get(parent).getColor()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @return true no node has self edge, else false.
+     */
+    private boolean checkSelfEdgeRestriction(){
+        for (Node<L> node : graphNodes.values()){
+            if (node.hasChild(node.getLabel()) || node.hasParent(node.getLabel())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * return true if the list has duplicates, else false.
+     */
+    private static <T> boolean hasDuplicates(List<T> list) {
+        Set<T> set = new HashSet<>();
+        for (T element : list) {
+            if (!set.add(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return true if there are no parallel edges, else false.
+     */
+    private boolean checkParallelEdgesRestriction(){
+        for (Node<L> node : graphNodes.values()){
+            if (hasDuplicates(node.getChildren()) || hasDuplicates(node.getParents())){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -49,6 +112,7 @@ public class BipartiteGraph<L> {
      */
     public void addNode(L nodeLabel, Object nodeType, NodeColor nodeColor)
         throws BipartiteGraphException{
+        checkRep();
 
         if (nodeLabel == null || nodeType == null || nodeColor == null){
             throw new BipartiteGraphException("Arguments must not be null");
@@ -59,12 +123,18 @@ public class BipartiteGraph<L> {
 
         Node<L> newNode = new Node<>(nodeLabel, nodeType, nodeColor);
         this.graphNodes.put(nodeLabel, newNode);
+        checkRep();
     }
     
     /**
      * @modifies this
      * @effects Adds a new edge to the graph.
      *  throws BipartiteGraphException in the following cases:
+     *  - one of the arguments is null
+     *  - one of the nodes does not exist
+     *  - both nodes are the same
+     *  - the nodes already have an edge connecting them in the same direction.
+     *  - the nodes have the same color
      */
     public void addEdge(L edgeLabel, L parentLabel, L childLabel)
         throws BipartiteGraphException{
@@ -82,6 +152,9 @@ public class BipartiteGraph<L> {
         }
         if (childNode == null){
             throw new BipartiteGraphException("Node " + childLabel + " does not exist");
+        }
+        if (parentLabel.equals(childLabel)){
+            throw new BipartiteGraphException("Self edges are not allowed");
         }
         if (parentNode.hasChild(childLabel)){
             throw new BipartiteGraphException("Node " + parentLabel + " already has child " + childLabel);
