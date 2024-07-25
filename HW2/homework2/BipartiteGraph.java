@@ -201,6 +201,25 @@ public class BipartiteGraph<L> {
     }
 
     /**
+     * @effects return a the object data of a given node
+     */
+    public Object getNodeData(L nodeLabel)
+        throws BipartiteGraphException{
+        
+        if (nodeLabel == null){
+            throw new BipartiteGraphException("Arguments must not be null");
+        }
+
+        checkRep();
+        Node<L> node = graphNodes.get(nodeLabel);
+        if (node == null){
+            throw new BipartiteGraphException("Node " + nodeLabel + " does not exist");
+        }
+
+        return node.getType();
+    }
+
+    /**
      * @effects return a list containing the labels of all children of the node with label nodeLabel.
      *          throws BipartiteGraphException if nodeLabel == null or no such node exists
      */
