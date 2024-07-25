@@ -44,9 +44,9 @@ public class Node<L> {
      * @effects asserts if the Representation Invarient breaks.
      */
     private void checkRep(){
-        assert this.nodeLabel == null : "Node label cannot be null";
-        assert this.nodeType == null : "Node type cannot be null";
-        assert this.nodeColor == null : "Node Color cannot be null";
+        assert this.nodeLabel != null : "Node label cannot be null";
+        assert this.nodeType != null : "Node type cannot be null";
+        assert this.nodeColor != null : "Node Color cannot be null";
         assert this.childrens.size() == this.outEdges.size() : "Children list and out edges most be the same size";
         assert this.parents.size() == this.inEdges.size() : "Parents list and in edges most be the same size";
         assert this.checkConsistency() : "Inconsistency in childrens or parents containers";
@@ -63,7 +63,7 @@ public class Node<L> {
         }
         
         for (Edge<L> edge : this.inEdges.values()){
-            if (this.parents.contains(edge.getChild()) == false)
+            if (this.parents.contains(edge.getParent()) == false)
                 return false;
         }
 

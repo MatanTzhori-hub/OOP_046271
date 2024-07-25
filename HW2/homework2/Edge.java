@@ -28,9 +28,9 @@ public class Edge<L> {
      * @effects asserts if the Representation Invarient breaks.
      */
     private void checkRep(){
-        assert this.edgeLabel == null : "Edge label cannot be null";
-        assert this.edgeChild == null : "Edge child cannot be null";
-        assert this.edgeParent == null : "Edge parent cannot be null";
+        assert this.edgeLabel != null : "Edge label cannot be null";
+        assert this.edgeChild != null : "Edge child cannot be null";
+        assert this.edgeParent != null : "Edge parent cannot be null";
     }
 
     /**

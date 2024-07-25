@@ -16,8 +16,7 @@ public class BipartiteGraphTestDriver {
      */
     public BipartiteGraphTestDriver () {
     	// TODO: Implement this constructor
-       
-       
+       this.graphs = new HashMap<>();
     }
 
     
@@ -29,8 +28,8 @@ public class BipartiteGraphTestDriver {
      */
     public void createGraph(String graphName) {
         // TODO: Implement this method
-        
-    	
+        BipartiteGraph<String> newGraph = new BipartiteGraph<>();
+    	this.graphs.put(graphName, newGraph);
     }
 
     
@@ -44,10 +43,10 @@ public class BipartiteGraphTestDriver {
      * @effects Adds a black node represented by the String nodeName to the
      * 			graph named graphName.
      */
-    public void addBlackNode(String graphName, String nodeName) {
+    public void addBlackNode(String graphName, String nodeName)
+        throws BipartiteGraphException {
     	// TODO: Implement this method
-    	
-    	
+        this.graphs.get(graphName).addNode(nodeName, nodeName, NodeColor.BLACK);
     }
 
     
@@ -61,10 +60,10 @@ public class BipartiteGraphTestDriver {
      * @effects Adds a white node represented by the String nodeName to the
      * 			graph named graphName.
      */
-    public void addWhiteNode(String graphName, String nodeName) {
-    	//TODO: Implement this method
-    	
-    	
+    public void addWhiteNode(String graphName, String nodeName)
+        throws BipartiteGraphException {
+        // TODO: Implement this method
+        this.graphs.get(graphName).addNode(nodeName, nodeName, NodeColor.WHITE);
     }
 
     
@@ -84,10 +83,10 @@ public class BipartiteGraphTestDriver {
      */
     public void addEdge(String graphName,
     					String parentName, String childName, 
-                        String edgeLabel) {
+                        String edgeLabel)
+                        throws BipartiteGraphException {
     	//TODO: Implement this method
-    	
-    	
+    	this.graphs.get(graphName).addEdge(edgeLabel, parentName, childName);
     }
 
     
@@ -96,10 +95,13 @@ public class BipartiteGraphTestDriver {
      * @return a space-separated list of the names of all the black nodes
      * 		   in the graph graphName, in alphabetical order.
      */
-    public String listBlackNodes(String graphName) {
+    public String listBlackNodes(String graphName)
+        throws BipartiteGraphException {
     	//TODO: Implement this method
-    	
-    	
+    	List<String> blackNodes = this.graphs.get(graphName).listColoredNodes(NodeColor.BLACK);
+        Collections.sort(blackNodes);
+        String s = String.join(" ", blackNodes);
+        return s;
     }
 
     
@@ -108,10 +110,13 @@ public class BipartiteGraphTestDriver {
      * @return a space-separated list of the names of all the white nodes
      * 		   in the graph graphName, in alphabetical order.
      */
-    public String listWhiteNodes(String graphName) {
-    	//TODO: Implement this method
-    	
-    	
+    public String listWhiteNodes(String graphName)
+        throws BipartiteGraphException {
+            //TODO: Implement this method
+            List<String> whiteNodes = this.graphs.get(graphName).listColoredNodes(NodeColor.WHITE);
+            Collections.sort(whiteNodes);
+            String s = String.join(" ", whiteNodes);
+            return s;
     }
 
     
@@ -120,10 +125,12 @@ public class BipartiteGraphTestDriver {
      * @return a space-separated list of the names of the children of
      * 		   parentName in the graph graphName, in alphabetical order.
      */
-    public String listChildren(String graphName, String parentName) {
+    public String listChildren(String graphName, String parentName)
+        throws BipartiteGraphException {
     	//TODO: Implement this method
-    	
-    	
+    	List<String> children = this.graphs.get(graphName).getNodeChildren(parentName);
+    	Collections.sort(children);
+        return String.join(" ", children);
     }
 
     
@@ -132,10 +139,12 @@ public class BipartiteGraphTestDriver {
      * @return a space-separated list of the names of the parents of
      * 		   childName in the graph graphName, in alphabetical order.
      */
-    public String listParents(String graphName, String childName) {
+    public String listParents(String graphName, String childName)
+        throws BipartiteGraphException {
     	//TODO: Implement this method
-    	
-    	
+    	List<String> parents = this.graphs.get(graphName).getNodeParents(childName);
+    	Collections.sort(parents);
+        return String.join(" ", parents);
     }
 
     
@@ -146,10 +155,10 @@ public class BipartiteGraphTestDriver {
      * 		   edge labeled edgeLabel, in the graph graphName.
      */
     public String getChildByEdgeLabel(String graphName, String parentName,
-    								   String edgeLabel) {
+    								   String edgeLabel)
+                                       throws BipartiteGraphException {
     	//TODO: Implement this method
-    	
-    	
+    	return this.graphs.get(graphName).getChildByEdgeLabel(parentName, edgeLabel);
     }
 
     
@@ -160,9 +169,9 @@ public class BipartiteGraphTestDriver {
      * 		   edge labeled edgeLabel, in the graph graphName.
      */
     public String getParentByEdgeLabel(String graphName, String childName,
-    									String edgeLabel) {
-    	//TODO: Implement this method
-    	
-    	
+    									String edgeLabel)
+                                        throws BipartiteGraphException {
+         //TODO: Implement this method
+         return this.graphs.get(graphName).getParentByEdgeLabel(childName, edgeLabel);
     }
 }

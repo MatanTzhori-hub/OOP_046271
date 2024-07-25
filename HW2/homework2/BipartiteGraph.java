@@ -36,7 +36,6 @@ public class BipartiteGraph<L> {
         assert checkColorRestriction() : "Same color nodes are not allowed to be connected";
         assert checkSelfEdgeRestriction() : "Self edges are not allowed";
         assert checkParallelEdgesRestriction() : "No parallel edges are allowed";
-        return;
     }
 
     /**
@@ -166,7 +165,7 @@ public class BipartiteGraph<L> {
             throw new BipartiteGraphException("Node " + parentLabel + " already has out edge " + edgeLabel);
         }
         if (childNode.hasInEdge(edgeLabel)){
-            throw new BipartiteGraphException("Node " + parentLabel + " already has in edge " + edgeLabel);
+            throw new BipartiteGraphException("Node " + childLabel + " already has in edge " + edgeLabel);
         }
         if (parentNode.getColor() == childNode.getColor()){
             throw new BipartiteGraphException("Connected nodes most have different colors");
