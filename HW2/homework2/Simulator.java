@@ -13,7 +13,7 @@ import java.util.List;
 public class Simulator<L> {
 	
 	/*
-	 * Abstruction Function: 
+	 * Abstraction Function: 
 	 *  The system is being represented by a BipartiteGraph. Each black node represents a pipe and
 	 *  each white node represents a filter. The BipartiteGraph is two sided, meaning pipes cannot
 	 *  be connected by an edge to each other, and same for filters. 
@@ -55,6 +55,14 @@ public class Simulator<L> {
 	public void addFilter(L filterLabel, Simulatable<L> filter)
 			throws BipartiteGraphException {
 		this.systemGraph.addNode(filterLabel, filter, NodeColor.WHITE);
+	}
+	
+	/**
+	 * 
+	 */
+	public void addEdge(L parentName, L childName, L edgeLabel)
+			throws BipartiteGraphException{
+		this.systemGraph.addEdge(parentName, childName, edgeLabel);
 	}
 	
 	/**
