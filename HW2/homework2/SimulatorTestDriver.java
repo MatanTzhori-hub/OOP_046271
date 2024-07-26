@@ -16,8 +16,7 @@ public class SimulatorTestDriver {
      */
     public SimulatorTestDriver () {
     	// TODO: Implement this constructor
-
-       
+    	this.simulators = new HashMap<>();
     }
 
 
@@ -29,8 +28,8 @@ public class SimulatorTestDriver {
      */
     public void createSimulator(String simName) {
         // TODO: Implement this method
-
-    	
+    	Simulator<String> newSim = new Simulator<>();
+    	this.simulators.put(simName, newSim);
     }
 
 
@@ -43,10 +42,11 @@ public class SimulatorTestDriver {
      * @effects Creates a new IntPipe named by the String pipeName and add it
      * 			to the simulator named simName.
      */
-    public void addPipe(String simName, String pipeName) {
+    public void addPipe(String simName, String pipeName)
+    		throws BipartiteGraphException{
     	// TODO: Implement this method
-
-    	
+    	Simulatable<String> newPipe = (Simulatable<String>) new IntPipe(pipeName);
+    	this.simulators.get(simName).addPipe(pipeName, newPipe);
     }
 
 
@@ -61,8 +61,8 @@ public class SimulatorTestDriver {
      */
     public void addPlusFilter(String simName, String filterName) {
     	// TODO: Implement this method
-
-    	
+    	Simulatable<String> newFilter = (Simulatable<String>) new PlusFilter(filterName);
+    	this.simulators.get(simName).addFilter(filterName, newFilter);
     }
 
 
@@ -77,8 +77,8 @@ public class SimulatorTestDriver {
      */
     public void addGCDFilter(String simName, String filterName) {
     	// TODO: Implement this method
-
-    	
+    	Simulatable<String> newFilter = (Simulatable<String>) new GCDFilter(filterName);
+    	this.simulators.get(simName).addFilter(filterName, newFilter);
     }
 
 
@@ -100,8 +100,7 @@ public class SimulatorTestDriver {
     					String parentName, String childName,
                         String edgeLabel) {
     	//TODO: Implement this method
-
-    	
+    	this.simulators.get(simName).addEdge(parentName, childName, edgeLabel);
     }
 
 
@@ -114,8 +113,7 @@ public class SimulatorTestDriver {
      */
     public void injectInput(String simName, String pipeName, int value) {
     	//TODO: Implement this method
-
-    	
+    	this.simulators.get(simName).insertInput(pipeName, value);
     }
 
 
@@ -126,8 +124,7 @@ public class SimulatorTestDriver {
      */
     public String listContents(String simName, String pipeName) {
     	//TODO: Implement this method
-
-    	
+    	return this.simulators.get(simName).getPipeContent(pipeName);
     }
 
     /**
@@ -137,7 +134,6 @@ public class SimulatorTestDriver {
      */
     public void simulate(String simName) {
     	//TODO: Implement this method
-    	
-    	
+    	this.simulators.get(simName).simulate();
     }
 }
