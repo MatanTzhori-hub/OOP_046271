@@ -201,7 +201,8 @@ public class BipartiteGraph<L> {
     }
 
     /**
-     * @effects return a the object data of a given node
+     * @effects return a the object data of a given node.
+     * 			throws BipartiteGraphException if nodeLabel == null or no such node exists
      */
     public Object getNodeData(L nodeLabel)
         throws BipartiteGraphException{

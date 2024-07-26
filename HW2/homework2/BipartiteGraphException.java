@@ -1,6 +1,6 @@
 package homework2;
 
-public class BipartiteGraphException extends Exception {
+public class BipartiteGraphException extends RuntimeException {
     
     /**
 	 * @effects Initializes this.

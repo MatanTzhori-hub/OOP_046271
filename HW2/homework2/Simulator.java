@@ -62,7 +62,24 @@ public class Simulator<L> {
 	 */
 	public void addEdge(L parentName, L childName, L edgeLabel)
 			throws BipartiteGraphException{
-		this.systemGraph.addEdge(parentName, childName, edgeLabel);
+		if (this.systemGraph.getNodeData(parentName) instanceof PlusFilter && this.systemGraph.getNodeChildren(parentName).size() == 1) {
+			throw new BipartiteGraphException("Plus-Filter " + parentName + " already have an output pipe");
+		}
+		this.systemGraph.addEdge(edgeLabel, parentName, childName);
+	}
+	
+	/**
+	 * 
+	 */
+	public void insertInput(L pipeName, int inVal) {
+		((IntPipe) this.systemGraph.getNodeData(pipeName)).insertInput(inVal);
+	}
+	
+	/**
+	 * 
+	 */
+	public String getPipeContent(L pipeName) {
+		return ((IntPipe) this.systemGraph.getNodeData(pipeName)).getContent();
 	}
 	
 	/**
@@ -91,7 +108,7 @@ public class Simulator<L> {
 	}
 	
 	/**
-	 * @effects asserts if the Representation Invarient breaks.
+	 * @effects asserts if the Representation Invariant breaks.
 	 */
 	public void checkRep() {
 		assert this.systemGraph != null : "";
