@@ -7,7 +7,7 @@ import java.util.List;
  * The PlusFilter is a filter that sums all it's input pipes and pass the sum to it's output pipe.
  * Requires an output pipe.
  */
-public class PlusFilter {
+public class PlusFilter implements Simulatable<String> {
     
     /*
      * Abstraction Function:
@@ -43,7 +43,7 @@ public class PlusFilter {
 	 * @effects Simulates this filter in the system modeled by graph.
 	 * 			The PlusFilter takes all inputs from all in coming pipes, and push their sum to the out going pipe.
 	 */
-	public void simulate(BipartiteGraph<String> graph) throws BipartiteGraphException{
+	public void simulate(BipartiteGraph<String> graph){
 		checkRep();
 		
 		List<String> inputsLabels = graph.getNodeParents(this.filterLabel);

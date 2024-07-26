@@ -8,7 +8,7 @@ import java.util.List;
  * The IntPipe is a pipe that passes through integers.
  * Empty pipe always returns 0.
  */
-public class IntPipe {
+public class IntPipe implements Simulatable<String> {
     
     /*
      * Abstraction Function:
@@ -90,10 +90,10 @@ public class IntPipe {
 		
 		List<Integer> combined = new ArrayList<>(this.inputPipe);
 		combined.addAll(this.outputPipe);
-		String s = new String();
+		String s = "";
 		for (int val : combined) {
-			s.concat(Integer.toString(val));
-			s.concat(" ");
+			s = s.concat(Integer.toString(val));
+			s = s.concat(" ");
 		}
 		if (s.length() > 0) {
 			s = s.substring(0, s.length() - 1);

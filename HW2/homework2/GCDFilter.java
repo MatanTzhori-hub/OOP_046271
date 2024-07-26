@@ -1,12 +1,10 @@
 package homework2;
 
-import java.util.List;
-
 /*
  * The GCDFilter is a filter that calculates the GCD of it's 'a' and 'b' input pipes, and pass the GCD to the 'gcd' output pipe.
  * Requires 'a' and 'b' input and output pipes, and a 'gcd' output pipe.
  */
-public class GCDFilter {
+public class GCDFilter implements Simulatable<String> {
     
     /*
      * Abstraction Function:
@@ -45,7 +43,7 @@ public class GCDFilter {
 	 * 			If |b| < |a| then the input 'a' goes to output 'b' and input 'b' goes to output 'a'
 	 * 			If |a| >= |b| then 'b' goes to output 'a' and a%b goes to output 'b'
 	 */
-	public void simulate(BipartiteGraph<String> graph) throws BipartiteGraphException{
+	public void simulate(BipartiteGraph<String> graph){
 		checkRep();
 		
 		IntPipe a_outPipe = (IntPipe) graph.getNodeData(graph.getChildByEdgeLabel(filterLabel, "a"));
