@@ -289,4 +289,19 @@ public class BipartiteGraphTest {
         assertEquals("", driver.listChildren("graph1", "h"));
         assertEquals("a c", driver.listParents("graph1", "h"));
 	}
+	
+	@Test
+	public void testGetNodeType() throws BipartiteGraphException{
+		BipartiteGraph<String> graph = new BipartiteGraph<>();
+		
+		graph.addNode("n1", "I am the data of the node", NodeColor.BLACK);
+
+        BipartiteGraphException e1 = assertThrows(BipartiteGraphException.class, ()->{graph.getNodeData(null);}, "no exception thrown");
+        assertEquals("Arguments must not be null", e1.getMessage());
+        BipartiteGraphException e2 = assertThrows(BipartiteGraphException.class, ()->{graph.getNodeData("n2");}, "no exception thrown");
+        assertEquals("Node n2 does not exist", e2.getMessage());
+        assertEquals("I am the data of the node", graph.getNodeData("n1"));
+	}
+        
+        
 }
