@@ -1,17 +1,17 @@
 package homework2;
 
-/*
+/**
  * The GCDFilter is a filter that calculates the GCD of it's 'a' and 'b' input pipes, and pass the GCD to the 'gcd' output pipe.
  * Requires 'a' and 'b' input and output pipes, and a 'gcd' output pipe.
  */
 public class GCDFilter implements Simulatable<String> {
     
-    /*
+    /**
      * Abstraction Function:
      *  filterLabel represents the filter's label in the system graph
      */
 
-     /*
+     /**
       * Representation Invariant: 
       *  filterLabel != null
       */

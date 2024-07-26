@@ -3,18 +3,18 @@ package homework2;
 import java.util.List;
 
 
-/*
+/**
  * The PlusFilter is a filter that sums all it's input pipes and pass the sum to it's output pipe.
  * Requires an output pipe.
  */
 public class PlusFilter implements Simulatable<String> {
     
-    /*
+    /**
      * Abstraction Function:
      *  filterLabel represents the filter's label in the system graph
      */
 
-     /*
+     /**
       * Representation Invariant: 
       *  filterLabel != null
       */

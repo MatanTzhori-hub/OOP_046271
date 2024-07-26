@@ -1,7 +1,7 @@
 package homework2;
 
 
-/*
+/**
  * The Edge class is an abstraction of a directed edge in a certain graph.
  * An Edge typicaly consists a label, and a child and parent labels.
  * The labels of the edge and the nodes are of class L.
@@ -9,13 +9,13 @@ package homework2;
  */
 public class Edge<L> {
     
-    /*
+    /**
      * Abstraction Function:
      *  this.edgeLabel represents the edge's label, this.edgeParent represents
      *  the edge's source node and edgeChild represents the edge's destination node.
      */
 
-     /*
+     /**
       * Representation Invariant: 
       *  this.edgeLabel  != null && this.edgeParent != null && this.edgeChild  != null
       */

@@ -8,7 +8,7 @@ import java.util.HashMap;
 enum NodeColor{BLACK, WHITE};
 
 
-/*
+/**
  * The Node class is an abstraction of a node object in a certain graph.
  * A node typically consists of a set of properties: {label, type, color}.
  * A node can have edges going in and out of it to different nodes.
@@ -16,7 +16,7 @@ enum NodeColor{BLACK, WHITE};
  */
 public class Node<L> {
     
-    /*
+    /**
      * Abstraction Function:
      *  The Node class represents a node in a graph. nodeLabel represents it's label,
      *  nodeType represents it's type and nodeColor represents it's color.
@@ -24,7 +24,7 @@ public class Node<L> {
      *  The children and parents contains the child and parent nodes labels of this node.
      */
 
-     /*
+     /**
       * Representation Invariant: 
       *  nodeLabel != null, nodeType != null, nodeColor != null,
       *  children and outEdges are with the same size and contains the same children

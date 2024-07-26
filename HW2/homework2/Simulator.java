@@ -3,7 +3,7 @@ package homework2;
 import java.util.List;
 
 
-/*
+/**
  * A Simulator is a simulation of a Pipe-Filter system that allow work objects to move through them.
  * The system consist of 3 object types:
  * 1. Work objects - an object that moves around the system, and get manipulated by it.
@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class Simulator<L> {
 	
-	/*
+	/**
 	 * Abstraction Function: 
 	 *  The system is being represented by a BipartiteGraph. Each black node represents a pipe and
 	 *  each white node represents a filter. The BipartiteGraph is two sided, meaning pipes cannot
 	 *  be connected by an edge to each other, and same for filters. 
 	 */
 	
-	/*
+	/**
 	 * Representation Invariant:
 	 * systemGraph is a valid Bipartite Graph. 
 	 */

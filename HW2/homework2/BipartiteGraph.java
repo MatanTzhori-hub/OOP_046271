@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*
+/**
  * A BipartiteGraph is a simple directed graph containing Black and White nodes, with no self edges.
  * BipartiteGraph's nodes of the same color may not be connected.
  * Each node and each edge in the graph is labeled with type L. In respect to L, all in edges of a node
@@ -14,14 +14,14 @@ import java.util.Set;
  */
 public class BipartiteGraph<L> {
     
-    /*
+    /**
      * Abstraction Function:
      *  graphNodes is a map of label-node pairs.
      *  All nodes that are apart of the graph are mapped in graphNodes.
      *  Each node consists of its in-edges, out-edges, label, type and color.
      */
 
-     /*
+     /**
       * Representation Invariant:
       *  all nodes in the graph most not have parallel edges, or self edges, and two nodes
       *  with the same color may not be connected.

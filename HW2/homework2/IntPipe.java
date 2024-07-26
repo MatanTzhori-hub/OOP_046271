@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/*
+/**
  * The IntPipe is a pipe that passes through integers.
  * Empty pipe always returns 0.
  */
 public class IntPipe implements Simulatable<String> {
     
-    /*
+    /**
      * Abstraction Function:
      *  The IntPipe is being represented by two Lists, one for input integers and one for output integers.
      *  A simulation of IntPipe moves all integers from the input list to the output list.
      *  Empty pipe always returns 0.
      */
 
-     /*
+     /**
       * Representation Invariant: 
       *  pipeLabel != null
       */
