@@ -10,7 +10,7 @@ package homework2;
 public class Edge<L> {
     
     /*
-     * Abstruction Function:
+     * Abstraction Function:
      *  this.edgeLabel represents the edge's label, this.edgeParent represents
      *  the edge's source node and edgeChild represents the edge's destination node.
      */

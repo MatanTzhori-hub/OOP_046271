@@ -15,7 +15,7 @@ import java.util.Set;
 public class BipartiteGraph<L> {
     
     /*
-     * Abstruction Function:
+     * Abstraction Function:
      *  graphNodes is a map of label-node pairs.
      *  All nodes that are apart of the graph are mapped in graphNodes.
      *  Each node consists of its in-edges, out-edges, label, type and color.
@@ -30,7 +30,7 @@ public class BipartiteGraph<L> {
     private HashMap<L, Node<L>> graphNodes;
 
     /**
-     * @effects asserts if the Representation Invarient breaks.
+     * @effects asserts if the Representation Invariant breaks.
      */
     private void checkRep(){
         assert checkColorRestriction() : "Same color nodes are not allowed to be connected";

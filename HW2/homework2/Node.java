@@ -10,24 +10,24 @@ enum NodeColor{BLACK, WHITE};
 
 /*
  * The Node class is an abstraction of a node object in a certain graph.
- * A node typicaly consists of a set of properties: {label, type, color}.
+ * A node typically consists of a set of properties: {label, type, color}.
  * A node can have edges going in and out of it to different nodes.
- * Nodes are muteable.
+ * Nodes are mutable.
  */
 public class Node<L> {
     
     /*
-     * Abstruction Function:
+     * Abstraction Function:
      *  The Node class represents a node in a graph. nodeLabel represents it's label,
      *  nodeType represents it's type and nodeColor represents it's color.
      *  The outEdges and inEdges contains the edges that and going out and coming in to this node.
-     *  The childrens and parents contains the child and parent nodes labels of this node.
+     *  The children and parents contains the child and parent nodes labels of this node.
      */
 
      /*
       * Representation Invariant: 
       *  nodeLabel != null, nodeType != null, nodeColor != null,
-      *  childrens and outEdges are with the same size and contains the same children
+      *  children and outEdges are with the same size and contains the same children
       *  parents and inEdges are with the same size and contains the same parents
       */
 
@@ -41,7 +41,7 @@ public class Node<L> {
     private Map<L, Edge<L>> inEdges;
 
     /**
-     * @effects asserts if the Representation Invarient breaks.
+     * @effects asserts if the Representation Invariant breaks.
      */
     private void checkRep(){
         assert this.nodeLabel != null : "Node label cannot be null";
