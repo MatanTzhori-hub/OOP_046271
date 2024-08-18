@@ -2,22 +2,23 @@ package homework4;
 
 
 /**
- * A ColoringStrategy is
+ * A ColoringStrategy is an interface for defining strategies to order indices.
+ * Implements 2 methods: getNext(), reset(), that dictates the order of indices.
  */
 public interface ColoringStrategy {
     /**
-     * Abstraction Function: 
+     * Abstraction Function: None
      * 
-     * Representation Invariant: 
+     * Representation Invariant: None
      */
 
      /**
-	 * @effects 
+	 * @returns the next index of the strategy.
 	 */
     public int getNext();
 
     /**
-    * @effects 
+    * @effects reset's the strategy to it's initial state.
     */
    public void reset();
 }
