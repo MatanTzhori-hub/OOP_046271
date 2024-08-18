@@ -29,6 +29,10 @@ public class ColorOddEvenStrategy implements ColoringStrategy{
 	 * @effects creates a new ColorOddEvenStrategy with the specified number of rows and columns.
 	 */
     public ColorOddEvenStrategy(int rows, int cols){
+        if (rows <= 0 || cols <= 0){
+            throw new IllegalArgumentException("Rows and Columns are non-negative.");
+        }
+        
         this.rows = rows;
         this.cols = cols;
         this.even = true;

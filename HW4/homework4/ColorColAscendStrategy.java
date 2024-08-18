@@ -28,6 +28,10 @@ public class ColorColAscendStrategy implements ColoringStrategy{
 	 * @effects Creates a new ColorColAscendStrategy with the specified number of rows and columns.
 	 */
     public ColorColAscendStrategy(int rows, int cols){
+        if (rows <= 0 || cols <= 0){
+            throw new IllegalArgumentException("Rows and Columns are non-negative.");
+        }
+        
         this.rows = rows;
         this.cols = cols;
         this.current = 0;

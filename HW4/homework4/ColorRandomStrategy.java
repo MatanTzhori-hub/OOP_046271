@@ -32,6 +32,10 @@ public class ColorRandomStrategy implements ColoringStrategy{
 	 * @effects creates a new ColorRandomStrategy with the specified number of rows and columns.
 	 */
     public ColorRandomStrategy(int rows, int cols){
+        if (rows <= 0 || cols <= 0){
+            throw new IllegalArgumentException("Rows and Columns are non-negative.");
+        }
+        
         this.rows = rows;
         this.cols = cols;
         indices = new ArrayList<>();

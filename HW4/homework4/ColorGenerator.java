@@ -37,6 +37,10 @@ public class ColorGenerator {
 	 * @effects private constructor to enforce singleton pattern. Initializes the ColorGenerator single object.
 	 */
     private ColorGenerator(ColoringStrategy strategy) {
+        if(strategy == null){
+            throw new NullPointerException();
+        }
+
         this.strategy = strategy;
         this.observers = new ArrayList<ColorObserver>();
     }
@@ -70,11 +74,11 @@ public class ColorGenerator {
 	 * @effects sets a new ColoringStrategy for the generator.
 	 */
     public void setStrategy(ColoringStrategy strategy){
-        checkRep();
-
         if(strategy == null){
             throw new NullPointerException();
         }
+
+        checkRep();
 
         this.strategy = strategy;
 
@@ -86,11 +90,11 @@ public class ColorGenerator {
 	 * @effects Inserts observer to this's observers set. If already included, does nothing.
 	 */
     public void addObserver(ColorObserver observer){
-        checkRep();
-
         if(observer == null){
             throw new NullPointerException();
         }
+
+        checkRep();
 
         if(!this.observers.contains(observer)){
             this.observers.add(observer);
@@ -104,6 +108,10 @@ public class ColorGenerator {
 	 * @effects Removes observer from this's observers set. If not included, does nothing.
 	 */
     public void removeObserver(ColorObserver observer){
+        if(observer == null){
+            throw new NullPointerException();
+        }
+        
         checkRep();
 
         if(this.observers.contains(observer)){

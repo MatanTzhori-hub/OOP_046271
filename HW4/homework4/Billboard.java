@@ -14,8 +14,8 @@ import javax.swing.*;
 public class Billboard extends JFrame implements ActionListener {
 
 	// preferred frame width and height.
-	private static final int WINDOW_WIDTH = 1000;
-	private static final int WINDOW_HEIGHT = 800;
+	private static final int WINDOW_WIDTH = 800;
+	private static final int WINDOW_HEIGHT = 600;
 
     private static final int NUM_ROWS = 5;
     private static final int NUM_COLS = 5;
